@@ -1,48 +1,48 @@
 using abandoned_vehicle_service.Controllers;
+using abandoned_vehicle_service.Models;
+using abandoned_vehicle_service.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using StockportGovUK.AspNetCore.Availability.Managers;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace abandoned_vehicle_service_tests.Controllers
 {
-    public class HomeControllerTests
+    public class HomeControllerTest
     {
         private readonly HomeController _homeController;
-        private readonly Mock<IAvailabilityManager> _mockAvailabilityManager = new Mock<IAvailabilityManager>();
+        private readonly Mock<IAbandonedVehicleService> _mockAbandonedVehicleService = new Mock<IAbandonedVehicleService>();
 
-        public HomeControllerTests()
+        public HomeControllerTest()
         {
-            _homeController = new HomeController(_mockAvailabilityManager.Object);
+            _homeController = new HomeController(Mock.Of<ILogger<HomeController>>(), _mockAbandonedVehicleService.Object);
         }
 
         [Fact]
-        public void Get_ShouldReturnOK()
+        public async Task Post_ShouldCallCreateCase()
         {
-            // Act
-            var response = _homeController.Get();
-            var statusResponse = response as OkResult;
-            
-            // Assert
-            Assert.NotNull(statusResponse);
-            Assert.Equal(200, statusResponse.StatusCode);
+            _mockAbandonedVehicleService
+                .Setup(_ => _.CreateCase(It.IsAny<AbandonedVehicleReport>()))
+                .ReturnsAsync("test");
+
+            var result = await _homeController.Post(null);
+
+            _mockAbandonedVehicleService
+                .Verify(_ => _.CreateCase(null), Times.Once);
         }
 
         [Fact]
-        public void Post_ShouldReturnOK()
+        public async Task Post_ReturnOkActionResult()
         {
-            // Arrange
-            _mockAvailabilityManager
-                .Setup(_ => _.IsFeatureEnabled(It.IsAny<string>()))
-                .ReturnsAsync(true);
+            _mockAbandonedVehicleService
+                .Setup(_ => _.CreateCase(It.IsAny<AbandonedVehicleReport>()))
+                .ReturnsAsync("test");
 
-            // Act
-            var response = _homeController.Post();
-            var statusResponse = response as OkResult;
-            
-            // Assert
-            Assert.NotNull(statusResponse);
-            Assert.Equal(200, statusResponse.StatusCode);
+            var result = await _homeController.Post(null);
+
+            Assert.Equal("OkObjectResult", result.GetType().Name);
         }
     }
 }

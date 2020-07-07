@@ -31,6 +31,7 @@ namespace abandoned_vehicle_service
             services.AddStorageProvider(Configuration);
             services.AddHttpClient<IGateway, Gateway>(Configuration, "IGatewayConfig");
             services.AddAvailability();
+            services.RegisterServices();
             services.AddSwagger();
             services.AddHealthChecks()
                     .AddCheck<TestHealthCheck>("TestHealthCheck");
@@ -53,7 +54,7 @@ namespace abandoned_vehicle_service
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("v1/swagger.json", "abandoned_vehicle_service API");
+                c.SwaggerEndpoint("v1/swagger.json", "Abandoned Vehicle Service API");
             });
         }
     }
