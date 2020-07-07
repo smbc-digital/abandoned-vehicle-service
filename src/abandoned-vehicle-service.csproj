@@ -20,7 +20,8 @@
     <PackageReference Include="StockportGovUK.AspNetCore.Attributes.TokenAuthentication" Version="1.0.0" />
     <PackageReference Include="StockportGovUK.AspNetCore.Availability" Version="1.1.0" />
     <PackageReference Include="StockportGovUK.AspNetCore.Logging.Elasticsearch.Aws" Version="1.0.0" />
-    <PackageReference Include="StockportGovUK.NetStandard.Gateways" Version="4.0.0" />
+    <PackageReference Include="StockportGovUK.NetStandard.Gateways" Version="4.0.3" />
+    <PackageReference Include="StockportGovUK.NetStandard.Models" Version="1.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
   </ItemGroup>
 
