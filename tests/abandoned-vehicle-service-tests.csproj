@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\abandoned_vehicle_service.csproj" />
+    <ProjectReference Include="..\src\abandoned-vehicle-service.csproj" />
   </ItemGroup>
 
 </Project>
