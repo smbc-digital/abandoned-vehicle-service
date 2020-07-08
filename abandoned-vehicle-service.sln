@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "abandoned-vehicle-service", "src\abandoned-vehicle-service.csproj", "{59117A43-BCD0-47D9-B819-669A6BA84B36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "abandoned_vehicle_service", "src\abandoned_vehicle_service.csproj", "{59117A43-BCD0-47D9-B819-669A6BA84B36}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "abandoned-vehicle-service-tests", "tests\abandoned-vehicle-service-tests.csproj", "{015738DB-9ABF-4363-BED9-856AD4612608}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "abandoned_vehicle_service_tests", "tests\abandoned_vehicle_service_tests.csproj", "{015738DB-9ABF-4363-BED9-856AD4612608}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
