@@ -5,6 +5,6 @@ namespace abandoned_vehicle_service.Helpers
 {
     public interface IMailHelper
     {
-        void SendEmail(Person person, EMailTemplate template, string caseReference);
+        void SendEmail(Person person, EMailTemplate template, string caseReference, StockportGovUK.NetStandard.Models.Addresses.Address street);
     }
 }

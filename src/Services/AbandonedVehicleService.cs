@@ -48,7 +48,7 @@ namespace abandoned_vehicle_service.Services
                     Phone = abandonedVehicleReport.Phone,
                 };
             
-                _mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, response.ResponseContent);
+                _mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, response.ResponseContent, abandonedVehicleReport.StreetAddress);
                 return response.ResponseContent;
             }
             catch (Exception ex)
