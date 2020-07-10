@@ -1,10 +1,8 @@
 using abandoned_vehicle_service.Models;
 using abandoned_vehicle_service.Services;
-using Amazon.Runtime.Internal.Util;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StockportGovUK.AspNetCore.Attributes.TokenAuthentication;
-using StockportGovUK.AspNetCore.Availability.Managers;
 using System.Threading.Tasks;
 
 namespace abandoned_vehicle_service.Controllers
@@ -17,7 +15,7 @@ namespace abandoned_vehicle_service.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IAbandonedVehicleService _abandonedVehicleService;
-       
+
         public HomeController(ILogger<HomeController> logger,
                               IAbandonedVehicleService abandonedVehicleService)
         {
@@ -25,14 +23,12 @@ namespace abandoned_vehicle_service.Controllers
             _abandonedVehicleService = abandonedVehicleService;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok();
-        }
-
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AbandonedVehicleReport abandonedVehicleReport)
-            => Ok(await _abandonedVehicleService.CreateCase(abandonedVehicleReport));
+        {
+            string result = await _abandonedVehicleService.CreateCase(abandonedVehicleReport);
+
+            return Ok(result);
+        }
     }
 }

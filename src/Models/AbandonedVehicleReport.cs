@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using StockportGovUK.NetStandard.Models.Addresses;
 
 namespace abandoned_vehicle_service.Models
 {
@@ -18,7 +15,7 @@ namespace abandoned_vehicle_service.Models
         public string VehicleModel { get; set; }
         public string VehicleColour { get; set; }
         public string VehicleRegistration { get; set; }
-        public StockportGovUK.NetStandard.Models.Addresses.Address StreetAddress { get; set; }
-        public StockportGovUK.NetStandard.Models.Addresses.Address CustomersAddress { get; set; }
+        public Address StreetAddress { get; set; }
+        public Address CustomersAddress { get; set; }
     }
 }

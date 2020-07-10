@@ -4,7 +4,6 @@ using abandoned_vehicle_service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using StockportGovUK.AspNetCore.Availability.Managers;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -27,7 +26,7 @@ namespace abandoned_vehicle_service_tests.Controllers
                 .Setup(_ => _.CreateCase(It.IsAny<AbandonedVehicleReport>()))
                 .ReturnsAsync("test");
 
-            var result = await _homeController.Post(null);
+            IActionResult result = await _homeController.Post(null);
 
             _mockAbandonedVehicleService
                 .Verify(_ => _.CreateCase(null), Times.Once);
@@ -40,7 +39,7 @@ namespace abandoned_vehicle_service_tests.Controllers
                 .Setup(_ => _.CreateCase(It.IsAny<AbandonedVehicleReport>()))
                 .ReturnsAsync("test");
 
-            var result = await _homeController.Post(null);
+            IActionResult result = await _homeController.Post(null);
 
             Assert.Equal("OkObjectResult", result.GetType().Name);
         }

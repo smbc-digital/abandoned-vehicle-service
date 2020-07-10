@@ -2,12 +2,10 @@
 using abandoned_vehicle_service.Models;
 using abandoned_vehicle_service.Services;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Moq;
 using StockportGovUK.NetStandard.Gateways.Response;
-using StockportGovUK.NetStandard.Gateways.VerintService;
+using StockportGovUK.NetStandard.Gateways.VerintServiceGateway;
 using StockportGovUK.NetStandard.Models.Verint;
 using System;
 using System.Threading.Tasks;
@@ -29,25 +27,23 @@ namespace abandoned_vehicle_service_tests.Services
             Email = "joe@test.com",
             Phone = "0161 123 1234",
             FurtherDetails = "Further detail test",
-            AbandonedReason = "Further detail test",
-            ImageOrVideo = "Further detail test",
-            VehicleMake = "Further detail test",
-            VehicleModel = "Further detail test",
-            VehicleColour = "Further detail test",
-            VehicleRegistration = "Further detail test",
+            AbandonedReason = "Abandoned Reason test",
+            ImageOrVideo = "Image Or Video test",
+            VehicleMake = "Vehicle Make test",
+            VehicleModel = "Vehicle Model test",
+            VehicleColour = "Vehicle Colour test",
+            VehicleRegistration = "Vehicle Registration test",
             StreetAddress = new Address
-            {
-                PlaceRef = "123456",
-                SelectedAddress = "green lane"
-            },
-            CustomersAddress = new Address
             {
                 AddressLine1 = "1 Oxford Road",
                 AddressLine2 = "Ardwick",
-                PlaceRef = "999999",
                 Postcode = "M1",
-                SelectedAddress = "selected address",
-                Town = "Manchester"
+            },
+            CustomersAddress = new Address
+            {
+                AddressLine1 = "118 London Road",
+                AddressLine2 = "",
+                Postcode = "M1 2SD",
             }
         };
         private IConfiguration config = InitConfiguration();
