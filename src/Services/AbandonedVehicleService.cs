@@ -25,20 +25,43 @@ namespace abandoned_vehicle_service.Services
             _mailHelper = mailHelper;
         }
 
+        //Uncomment when verint connection is created
+        //public async Task<string> CreateCase(AbandonedVehicleReport abandonedVehicleReport)
+        //{
+        //    Case crmCase = CreateCrmCaseObject(abandonedVehicleReport);
+
+        //    try
+        //    {               
+        //        StockportGovUK.NetStandard.Gateways.Response.HttpResponse<string> response = await _verintServiceGateway.CreateCase(crmCase);
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            throw new Exception("Status code not successful");
+        //        }
+
+        //        Person person = new Person
+        //        {
+        //            FirstName = abandonedVehicleReport.FirstName,
+        //            LastName = abandonedVehicleReport.LastName,
+        //            Email = abandonedVehicleReport.Email,
+        //            Phone = abandonedVehicleReport.Phone,
+        //        };
+
+        //        _mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, response.ResponseContent, abandonedVehicleReport.StreetAddress);
+        //        return response.ResponseContent;              
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"CRMService CreateAbandonedVehicleService an exception has occured while creating the case in verint service", ex);
+        //    }
+        //}
+
+        //remove when verint connection is created
         public async Task<string> CreateCase(AbandonedVehicleReport abandonedVehicleReport)
         {
             Case crmCase = CreateCrmCaseObject(abandonedVehicleReport);
 
             try
-            {
-                //Connection not created - uncomment
-                //StockportGovUK.NetStandard.Gateways.Response.HttpResponse<string> response = await _verintServiceGateway.CreateCase(crmCase);
-                //Connection not created - uncomment
-                //if (!response.IsSuccessStatusCode)
-                //{
-                //    throw new Exception("Status code not successful");
-                //}
-
+            {               
                 Person person = new Person
                 {
                     FirstName = abandonedVehicleReport.FirstName,
@@ -46,10 +69,7 @@ namespace abandoned_vehicle_service.Services
                     Email = abandonedVehicleReport.Email,
                     Phone = abandonedVehicleReport.Phone,
                 };
-                //Connection not created - uncomment
-                //_mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, response.ResponseContent, abandonedVehicleReport.StreetAddress);
-                //return response.ResponseContent;
-
+                
                 Guid randomReference = Guid.NewGuid();
                 _mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, randomReference.ToString(), abandonedVehicleReport.StreetAddress);
                 return randomReference.ToString();
