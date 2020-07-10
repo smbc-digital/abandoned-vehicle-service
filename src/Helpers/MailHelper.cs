@@ -25,7 +25,7 @@ namespace abandoned_vehicle_service.Helpers
             _logger.LogInformation(caseReference, street, person);
             submissionDetails.Subject = "Abandoned Vehicle Report - submission";            
             submissionDetails.Reference = caseReference;
-            submissionDetails.StreetInput = street;
+            submissionDetails.StreetInput = street.SelectedAddress;
             submissionDetails.FirstName = person.FirstName;
             submissionDetails.LastName = person.LastName;
             submissionDetails.RecipientAddress = person.Email;
