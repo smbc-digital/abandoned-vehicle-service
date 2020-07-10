@@ -1,11 +1,11 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using StockportGovUK.AspNetCore.Logging.Elasticsearch.Aws;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 
 namespace abandoned_vehicle_service
 {

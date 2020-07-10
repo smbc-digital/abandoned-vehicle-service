@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using abandoned_vehicle_service.Helpers;
+﻿using abandoned_vehicle_service.Helpers;
 using abandoned_vehicle_service.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 
 namespace abandoned_vehicle_service.Utils.ServiceCollectionExtensions
 {

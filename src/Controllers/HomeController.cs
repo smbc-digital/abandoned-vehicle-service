@@ -24,7 +24,7 @@ namespace abandoned_vehicle_service.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]AbandonedVehicleReport abandonedVehicleReport)
+        public async Task<IActionResult> Post([FromBody] AbandonedVehicleReport abandonedVehicleReport)
         {
             string result = await _abandonedVehicleService.CreateCase(abandonedVehicleReport);
 

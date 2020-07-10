@@ -1,14 +1,10 @@
 ﻿using abandoned_vehicle_service.Helpers;
 using abandoned_vehicle_service.Models;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using StockportGovUK.NetStandard.Gateways.VerintServiceGateway;
 using StockportGovUK.NetStandard.Models.Enums;
 using StockportGovUK.NetStandard.Models.Verint;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
