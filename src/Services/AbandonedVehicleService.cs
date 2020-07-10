@@ -31,12 +31,13 @@ namespace abandoned_vehicle_service.Services
 
             try
             {
-                StockportGovUK.NetStandard.Gateways.Response.HttpResponse<string> response = await _verintServiceGateway.CreateCase(crmCase);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception("Status code not successful");
-                }
+                //Connection not created - uncomment
+                //StockportGovUK.NetStandard.Gateways.Response.HttpResponse<string> response = await _verintServiceGateway.CreateCase(crmCase);
+                //Connection not created - uncomment
+                //if (!response.IsSuccessStatusCode)
+                //{
+                //    throw new Exception("Status code not successful");
+                //}
 
                 Person person = new Person
                 {
@@ -45,9 +46,13 @@ namespace abandoned_vehicle_service.Services
                     Email = abandonedVehicleReport.Email,
                     Phone = abandonedVehicleReport.Phone,
                 };
+                //Connection not created - uncomment
+                //_mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, response.ResponseContent, abandonedVehicleReport.StreetAddress);
+                //return response.ResponseContent;
 
-                _mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, response.ResponseContent, abandonedVehicleReport.StreetAddress);
-                return response.ResponseContent;
+                Guid randomReference = Guid.NewGuid();
+                _mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, randomReference.ToString(), abandonedVehicleReport.StreetAddress);
+                return randomReference.ToString();
             }
             catch (Exception ex)
             {
