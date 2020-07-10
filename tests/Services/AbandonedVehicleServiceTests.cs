@@ -7,7 +7,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using StockportGovUK.NetStandard.Gateways.Response;
-using StockportGovUK.NetStandard.Gateways.VerintService;
+using StockportGovUK.NetStandard.Gateways.VerintServiceGateway;
+using StockportGovUK.NetStandard.Models.Addresses;
 using StockportGovUK.NetStandard.Models.Verint;
 using System;
 using System.Threading.Tasks;
@@ -37,17 +38,15 @@ namespace abandoned_vehicle_service_tests.Services
             VehicleRegistration = "Further detail test",
             StreetAddress = new Address
             {
-                PlaceRef = "123456",
-                SelectedAddress = "green lane"
+                AddressLine1 = "1 Oxford Road",
+                AddressLine2 = "Ardwick",
+                Postcode = "M1",
             },
             CustomersAddress = new Address
             {
-                AddressLine1 = "1 Oxford Road",
-                AddressLine2 = "Ardwick",
-                PlaceRef = "999999",
-                Postcode = "M1",
-                SelectedAddress = "selected address",
-                Town = "Manchester"
+                AddressLine1 = "118 London Road",
+                AddressLine2 = "",
+                Postcode = "M1 2SD",
             }
         };
         private IConfiguration config = InitConfiguration();

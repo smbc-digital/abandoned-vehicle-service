@@ -1,12 +1,14 @@
 ﻿using abandoned_vehicle_service.Helpers;
 using abandoned_vehicle_service.Models;
 using Microsoft.Extensions.Configuration;
-using StockportGovUK.NetStandard.Gateways.VerintService;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using StockportGovUK.NetStandard.Gateways.VerintServiceGateway;
 using StockportGovUK.NetStandard.Models.Enums;
 using StockportGovUK.NetStandard.Models.Verint;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +35,7 @@ namespace abandoned_vehicle_service.Services
 
             try
             {
-                var response = await _verintServiceGateway.CreateCase(crmCase);
+                StockportGovUK.NetStandard.Gateways.Response.HttpResponse<string> response = await _verintServiceGateway.CreateCase(crmCase);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -47,7 +49,7 @@ namespace abandoned_vehicle_service.Services
                     Email = abandonedVehicleReport.Email,
                     Phone = abandonedVehicleReport.Phone,
                 };
-            
+
                 _mailHelper.SendEmail(person, EMailTemplate.AbandonedVehicleReport, response.ResponseContent, abandonedVehicleReport.StreetAddress);
                 return response.ResponseContent;
             }
@@ -145,7 +147,7 @@ namespace abandoned_vehicle_service.Services
                 description.Append($"Vehicle Model: {abandonedVehicleReport.VehicleModel}");
                 description.Append(Environment.NewLine);
             }
-            
+
             if (!string.IsNullOrEmpty(abandonedVehicleReport.VehicleColour))
             {
                 description.Append($"Vehicle Colour: {abandonedVehicleReport.VehicleColour}");

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using abandoned_vehicle_service.Utils.HealthChecks;
+﻿using abandoned_vehicle_service.Utils.HealthChecks;
 using abandoned_vehicle_service.Utils.ServiceCollectionExtensions;
 using abandoned_vehicle_service.Utils.StorageProvider;
 using Microsoft.AspNetCore.Builder;
@@ -9,8 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockportGovUK.AspNetCore.Availability;
 using StockportGovUK.AspNetCore.Availability.Middleware;
+using StockportGovUK.AspNetCore.Middleware;
 using StockportGovUK.NetStandard.Gateways;
-using StockportGovUK.NetStandard.Gateways.Extensions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace abandoned_vehicle_service
 {
@@ -29,7 +29,7 @@ namespace abandoned_vehicle_service
             services.AddControllers()
                     .AddNewtonsoftJson();
             services.AddStorageProvider(Configuration);
-            services.AddHttpClient<IGateway, Gateway>(Configuration, "IGatewayConfig");
+            services.AddResilientHttpClients<IGateway, Gateway>(Configuration);
             services.AddAvailability();
             services.RegisterServices();
             services.AddSwagger();
@@ -39,16 +39,22 @@ namespace abandoned_vehicle_service
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseExceptionHandler($"/api/v1/error{(env.IsDevelopment() ? "/local" : string.Empty)}");
-
-            app.UseMiddleware<Availability>();
+            if (env.IsEnvironment("local"))
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-            
             app.UseEndpoints(endpoints => endpoints.MapControllers());
-            
+
+            app.UseMiddleware<Availability>();
+            app.UseMiddleware<ApiExceptionHandling>();
+
             app.UseHealthChecks("/healthcheck", HealthCheckConfig.Options);
 
             app.UseSwagger();

@@ -1,7 +1,7 @@
 ﻿using abandoned_vehicle_service.Models;
 using Newtonsoft.Json;
-using StockportGovUK.NetStandard.Gateways.MailingService;
-using StockportGovUK.NetStandard.Models.AbandonedVehicle;
+using StockportGovUK.NetStandard.Gateways.MailingServiceGateway;
+using StockportGovUK.NetStandard.Models.ComplimentsComplaints;
 using StockportGovUK.NetStandard.Models.Enums;
 using StockportGovUK.NetStandard.Models.Mail;
 
@@ -18,7 +18,7 @@ namespace abandoned_vehicle_service.Helpers
 
         public void SendEmail(Person person, EMailTemplate template, string caseReference, StockportGovUK.NetStandard.Models.Addresses.Address street)
         {
-            AbandonedVehicleMailModel submissionDetails = new AbandonedVehicleMailModel
+            StockportGovUK.NetStandard.Models.AbandonedVehicle.AbandonedVehicleMailModel submissionDetails = new StockportGovUK.NetStandard.Models.AbandonedVehicle.AbandonedVehicleMailModel
             {
                 Subject = "Abandoned Vehicle Report - submission",
                 Reference = caseReference,
