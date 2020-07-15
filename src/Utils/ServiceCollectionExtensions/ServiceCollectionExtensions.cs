@@ -1,20 +1,37 @@
 ﻿using abandoned_vehicle_service.Helpers;
+using abandoned_vehicle_service.Models;
 using abandoned_vehicle_service.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions;
+using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationEFromExtensions;
 using System.Collections.Generic;
 
 namespace abandoned_vehicle_service.Utils.ServiceCollectionExtensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterServices(this IServiceCollection services)
+        public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<IMailHelper, MailHelper>();
             services.AddTransient<IAbandonedVehicleService, AbandonedVehicleService>();
+
+            return services;
         }
 
-        public static void AddSwagger(this IServiceCollection services)
+        public static IServiceCollection RegisterIOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<ConfirmIntegrationEFormOptions>
+                (configuration.GetSection(ConfirmIntegrationEFormOptions.ConfirmIntegrationEForm));
+
+            services.Configure<VerintOptions>
+                (configuration.GetSection(VerintOptions.Verint));
+
+            return services;
+        }
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -38,6 +55,8 @@ namespace abandoned_vehicle_service.Utils.ServiceCollectionExtensions
                     }
                 });
             });
+
+            return services;
         }
     }
 }

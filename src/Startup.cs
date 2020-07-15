@@ -9,7 +9,8 @@ using Microsoft.Extensions.Hosting;
 using StockportGovUK.AspNetCore.Availability;
 using StockportGovUK.AspNetCore.Availability.Middleware;
 using StockportGovUK.AspNetCore.Middleware;
-using StockportGovUK.NetStandard.Gateways;
+using StockportGovUK.NetStandard.Gateways.MailingService;
+using StockportGovUK.NetStandard.Gateways.VerintService;
 using System.Diagnostics.CodeAnalysis;
 
 namespace abandoned_vehicle_service
@@ -29,10 +30,16 @@ namespace abandoned_vehicle_service
             services.AddControllers()
                     .AddNewtonsoftJson();
             services.AddStorageProvider(Configuration);
-            services.AddResilientHttpClients<IGateway, Gateway>(Configuration);
+
+            services.AddHttpClient<IVerintServiceGateway, VerintServiceGateway>();
+            services.AddHttpClient<IMailingServiceGateway, MailingServiceGateway>();
+
             services.AddAvailability();
-            services.RegisterServices();
-            services.AddSwagger();
+
+            services.RegisterServices()
+                .RegisterIOptions(Configuration)
+                .AddSwagger();
+
             services.AddHealthChecks()
                     .AddCheck<TestHealthCheck>("TestHealthCheck");
         }
