@@ -23,7 +23,7 @@ namespace abandoned_vehicle_service.Utils.ServiceCollectionExtensions
         public static IServiceCollection RegisterIOptions(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<ConfirmIntegrationFormOptions>
-                (configuration.GetSection(ConfirmIntegrationFormOptions.ConfirmIntegrationEForm));
+                (configuration.GetSection(ConfirmIntegrationFormOptions.ConfirmIntegrationForm));
 
             services.Configure<VerintOptions>
                 (configuration.GetSection(VerintOptions.Verint));

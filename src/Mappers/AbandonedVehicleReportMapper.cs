@@ -31,7 +31,8 @@ namespace abandoned_vehicle_service.Mappers
                         AddressLine2 = model.CustomersAddress.AddressLine2,
                         AddressLine3 = model.CustomersAddress.Town,
                         Postcode = model.CustomersAddress.Postcode,
-                        Reference = model.CustomersAddress.PlaceRef
+                        Reference = model.CustomersAddress.PlaceRef,
+                        Description = model.CustomersAddress.ToString()
                     }
                 }
             };
@@ -41,7 +42,8 @@ namespace abandoned_vehicle_service.Mappers
                 crmCase.AssociatedWithBehaviour = AssociatedWithBehaviourEnum.Street;
                 crmCase.Street = new Street
                 {
-                    Reference = model.StreetAddress.PlaceRef
+                    Reference = model.StreetAddress.PlaceRef,
+                    Description = model.CustomersAddress.ToString()
                 };
             }
 
