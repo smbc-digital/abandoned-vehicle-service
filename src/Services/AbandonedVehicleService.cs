@@ -4,7 +4,7 @@ using abandoned_vehicle_service.Helpers;
 using abandoned_vehicle_service.Mappers;
 using abandoned_vehicle_service.Models;
 using Microsoft.Extensions.Options;
-using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationEFromExtensions;
+using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationFromExtensions;
 using StockportGovUK.NetStandard.Gateways.VerintService;
 using StockportGovUK.NetStandard.Models.Enums;
 
@@ -15,12 +15,12 @@ namespace abandoned_vehicle_service.Services
         private readonly IVerintServiceGateway _verintServiceGateway;
         private readonly IMailHelper _mailHelper;
         private readonly VerintOptions _verintOptions;
-        private readonly ConfirmIntegrationEFormOptions _VOFConfiguration;
+        private readonly ConfirmIntegrationFormOptions _VOFConfiguration;
 
         public AbandonedVehicleService(IVerintServiceGateway verintServiceGateway,
                                        IMailHelper mailHelper,
                                        IOptions<VerintOptions> verintOptions,
-                                       IOptions<ConfirmIntegrationEFormOptions> VOFConfiguration)
+                                       IOptions<ConfirmIntegrationFormOptions> VOFConfiguration)
         {
             _verintServiceGateway = verintServiceGateway;
             _mailHelper = mailHelper;
@@ -44,7 +44,7 @@ namespace abandoned_vehicle_service.Services
 
             try
             {
-                var response = await _verintServiceGateway.CreateVerintOnlineFormCase(crmCase.ToConfirmIntegrationEFormCase(_VOFConfiguration));
+                var response = await _verintServiceGateway.CreateVerintOnlineFormCase(crmCase.ToConfirmIntegrationFormCase(_VOFConfiguration));
                 if (!response.IsSuccessStatusCode)
                     throw new Exception("AbandonedVehicleService.CreateCase: CreateVerintOnlineFormCase status code not successful");
 

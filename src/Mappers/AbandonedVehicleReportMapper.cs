@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using abandoned_vehicle_service.Models;
-using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationEFromExtensions;
+using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationFromExtensions;
 using StockportGovUK.NetStandard.Models.Verint;
 
 namespace abandoned_vehicle_service.Mappers
@@ -9,7 +9,7 @@ namespace abandoned_vehicle_service.Mappers
     public static class AbandonedVehicleReportMapper
     {
         public static Case ToCase(this AbandonedVehicleReport model,
-            ConfirmIntegrationEFormOptions _VOFConfiguration,
+            ConfirmIntegrationFormOptions _VOFConfiguration,
             VerintOptions _verintOptions)
         {
             var crmCase = new Case
@@ -31,8 +31,7 @@ namespace abandoned_vehicle_service.Mappers
                         AddressLine2 = model.CustomersAddress.AddressLine2,
                         AddressLine3 = model.CustomersAddress.Town,
                         Postcode = model.CustomersAddress.Postcode,
-                        Reference = model.CustomersAddress.PlaceRef,
-                        Description = model.CustomersAddress.ToString()
+                        Reference = model.CustomersAddress.PlaceRef
                     }
                 }
             };
@@ -42,8 +41,7 @@ namespace abandoned_vehicle_service.Mappers
                 crmCase.AssociatedWithBehaviour = AssociatedWithBehaviourEnum.Street;
                 crmCase.Street = new Street
                 {
-                    Reference = model.StreetAddress.PlaceRef,
-                    Description = model.StreetAddress.ToString()
+                    Reference = model.StreetAddress.PlaceRef
                 };
             }
 
