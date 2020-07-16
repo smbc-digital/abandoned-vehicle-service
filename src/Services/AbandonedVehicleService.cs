@@ -31,21 +31,29 @@ namespace abandoned_vehicle_service.Services
         public async Task<string> CreateCase(AbandonedVehicleReport abandonedVehicleReport)
         {
             var crmCase = abandonedVehicleReport
-                .ToCase(_VOFConfiguration, _verintOptions)
-                .ToConfirmIntegrationEFormCase(_VOFConfiguration);
+                .ToCase(_VOFConfiguration, _verintOptions);
+
+            var streetResult = await _verintServiceGateway.GetStreet(abandonedVehicleReport.StreetAddress.PlaceRef);
+
+            if(!streetResult.IsSuccessStatusCode)
+                throw new Exception("AbandonedVehicleService.CreateCase: GetStreet status code not successful");
+
+            // confrim uses the USRN for the street,
+            // however Verint uses the verint-address-id (Reference) (abandonedVehicleReport.StreetAddress.PlaceRef) for streets
+            crmCase.Street.USRN = streetResult.ResponseContent.USRN;
 
             try
             {
-                var response = await _verintServiceGateway.CreateVerintOnlineFormCase(crmCase);
+                var response = await _verintServiceGateway.CreateVerintOnlineFormCase(crmCase.ToConfirmIntegrationEFormCase(_VOFConfiguration));
                 if (!response.IsSuccessStatusCode)
-                    throw new Exception("AbandonedVehicleService.CreateCase: Status code not successful");
+                    throw new Exception("AbandonedVehicleService.CreateCase: CreateVerintOnlineFormCase status code not successful");
 
                 var person = new Person
                 {
                     FirstName = abandonedVehicleReport.FirstName,
                     LastName = abandonedVehicleReport.LastName,
                     Email = abandonedVehicleReport.Email,
-                    Phone = abandonedVehicleReport.Phone,
+                    Phone = abandonedVehicleReport.Phone
                 };
 
                 _mailHelper.SendEmail(

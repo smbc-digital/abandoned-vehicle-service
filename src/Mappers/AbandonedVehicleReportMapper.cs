@@ -21,9 +21,10 @@ namespace abandoned_vehicle_service.Mappers
             };
 
             if (!string.IsNullOrWhiteSpace(model.StreetAddress?.PlaceRef))
+                crmCase.AssociatedWithBehaviour = AssociatedWithBehaviourEnum.Street;
                 crmCase.Street = new Street
                 {
-                    Reference = model.StreetAddress?.PlaceRef
+                    Reference = model.StreetAddress.PlaceRef
                 };
 
             if (!string.IsNullOrEmpty(model.FirstName) && !string.IsNullOrEmpty(model.LastName))
