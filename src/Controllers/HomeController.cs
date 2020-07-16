@@ -2,7 +2,6 @@ using abandoned_vehicle_service.Models;
 using abandoned_vehicle_service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Serilog.Sinks.Elasticsearch.Durable;
 using StockportGovUK.AspNetCore.Attributes.TokenAuthentication;
 using System;
 using System.Threading.Tasks;
