@@ -17,6 +17,7 @@ namespace abandoned_vehicle_service.Mappers
                 EventCode = _VOFConfiguration.EventId,
                 EventTitle = _verintOptions.EventTitle,
                 Classification = _verintOptions.Classification,
+                FurtherLocationInformation = model.FurtherDetails,
                 Description = GenerateDescription(model)
             };
 
