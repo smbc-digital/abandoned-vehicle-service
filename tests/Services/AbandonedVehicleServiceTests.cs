@@ -7,6 +7,7 @@ using Moq;
 using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationEFromExtensions;
 using StockportGovUK.NetStandard.Gateways.Response;
 using StockportGovUK.NetStandard.Gateways.VerintService;
+using StockportGovUK.NetStandard.Models.Addresses;
 using StockportGovUK.NetStandard.Models.Models.Verint.VerintOnlineForm;
 using StockportGovUK.NetStandard.Models.Verint;
 using System;
@@ -40,6 +41,7 @@ namespace abandoned_vehicle_service_tests.Services
                 AddressLine1 = "1 Oxford Road",
                 AddressLine2 = "Ardwick",
                 Postcode = "M1",
+                PlaceRef = "10000000"
             },
             CustomersAddress = new Address
             {
@@ -83,6 +85,17 @@ namespace abandoned_vehicle_service_tests.Services
         public async Task CreateCase_ShouldReThrowCreateCaseException_CaughtFromVerintGateway()
         {
             _mockVerintServiceGateway
+                .Setup(_ => _.GetStreet(It.IsAny<string>()))
+                .ReturnsAsync(new HttpResponse<AddressSearchResult>
+                {
+                    IsSuccessStatusCode = true,
+                    ResponseContent = new AddressSearchResult
+                    {
+                        USRN = "test"
+                    }
+                });
+
+            _mockVerintServiceGateway
                 .Setup(_ => _.CreateCase(It.IsAny<Case>()))
                 .Throws(new Exception("TestException"));
 
@@ -93,6 +106,17 @@ namespace abandoned_vehicle_service_tests.Services
         [Fact]
         public async Task CreateCase_ShouldThrowException_WhenIsNotSuccessStatusCode()
         {
+            _mockVerintServiceGateway
+                .Setup(_ => _.GetStreet(It.IsAny<string>()))
+                .ReturnsAsync(new HttpResponse<AddressSearchResult>
+                {
+                    IsSuccessStatusCode = true,
+                    ResponseContent = new AddressSearchResult
+                    {
+                        USRN = "test"
+                    }
+                });
+
             _mockVerintServiceGateway
                 .Setup(_ => _.CreateVerintOnlineFormCase(It.IsAny<VerintOnlineFormRequest>()))
                 .ReturnsAsync(new HttpResponse<VerintOnlineFormResponse>
@@ -106,6 +130,16 @@ namespace abandoned_vehicle_service_tests.Services
         [Fact]
         public async Task CreateCase_ShouldReturnResponseContent()
         {
+            _mockVerintServiceGateway
+                .Setup(_ => _.GetStreet(It.IsAny<string>()))
+                .ReturnsAsync(new HttpResponse<AddressSearchResult>
+                {
+                    IsSuccessStatusCode = true,
+                    ResponseContent = new AddressSearchResult
+                    {
+                        USRN = "test"
+                    }
+                });
 
             _mockVerintServiceGateway
                 .Setup(_ => _.CreateVerintOnlineFormCase(It.IsAny<VerintOnlineFormRequest>()))
@@ -127,6 +161,17 @@ namespace abandoned_vehicle_service_tests.Services
         public async Task CreateCase_ShouldCallVerintGatewayWithCRMCase()
         {
             VerintOnlineFormRequest crmCaseParameter = null;
+
+            _mockVerintServiceGateway
+                .Setup(_ => _.GetStreet(It.IsAny<string>()))
+                .ReturnsAsync(new HttpResponse<AddressSearchResult>
+                {
+                    IsSuccessStatusCode = true,
+                    ResponseContent = new AddressSearchResult
+                    {
+                        USRN = "test"
+                    }
+                });
 
             _mockVerintServiceGateway
                 .Setup(_ => _.CreateVerintOnlineFormCase(It.IsAny<VerintOnlineFormRequest>()))

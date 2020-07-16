@@ -24,7 +24,8 @@ namespace abandoned_vehicle_service.Mappers
                 crmCase.AssociatedWithBehaviour = AssociatedWithBehaviourEnum.Street;
                 crmCase.Street = new Street
                 {
-                    Reference = model.StreetAddress.PlaceRef
+                    Reference = model.StreetAddress.PlaceRef,
+                    Description = string.Empty
                 };
 
             if (!string.IsNullOrEmpty(model.FirstName) && !string.IsNullOrEmpty(model.LastName))
