@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions;
-using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationEFromExtensions;
+using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationFromExtensions;
 using System.Collections.Generic;
 
 namespace abandoned_vehicle_service.Utils.ServiceCollectionExtensions
@@ -22,8 +22,8 @@ namespace abandoned_vehicle_service.Utils.ServiceCollectionExtensions
 
         public static IServiceCollection RegisterIOptions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<ConfirmIntegrationEFormOptions>
-                (configuration.GetSection(ConfirmIntegrationEFormOptions.ConfirmIntegrationEForm));
+            services.Configure<ConfirmIntegrationFormOptions>
+                (configuration.GetSection(ConfirmIntegrationFormOptions.ConfirmIntegrationEForm));
 
             services.Configure<VerintOptions>
                 (configuration.GetSection(VerintOptions.Verint));

@@ -4,7 +4,7 @@ using abandoned_vehicle_service.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationEFromExtensions;
+using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationFromExtensions;
 using StockportGovUK.NetStandard.Gateways.Response;
 using StockportGovUK.NetStandard.Gateways.VerintService;
 using StockportGovUK.NetStandard.Models.Addresses;
@@ -47,6 +47,7 @@ namespace abandoned_vehicle_service_tests.Services
             {
                 AddressLine1 = "118 London Road",
                 AddressLine2 = "",
+                Town = "",
                 Postcode = "M1 2SD",
             }
         };
@@ -62,10 +63,10 @@ namespace abandoned_vehicle_service_tests.Services
                     EventTitle = "Test Event Title"                    
                 });
 
-            var mockConfirmIntegrationEFromOptions = new Mock<IOptions<ConfirmIntegrationEFormOptions>>();
+            var mockConfirmIntegrationEFromOptions = new Mock<IOptions<ConfirmIntegrationFormOptions>>();
             mockConfirmIntegrationEFromOptions
                 .SetupGet(_ => _.Value)
-                .Returns(new ConfirmIntegrationEFormOptions
+                .Returns(new ConfirmIntegrationFormOptions
                 {
                     EventId = 1000,
                     ClassCode = "test ClassCode",
@@ -152,7 +153,7 @@ namespace abandoned_vehicle_service_tests.Services
                     }
                 });
 
-            string result = await _service.CreateCase(_abandonedVehicleReportData);
+            var result = await _service.CreateCase(_abandonedVehicleReportData);
 
             Assert.Contains("test", result);
         }

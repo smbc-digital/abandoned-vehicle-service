@@ -15,5 +15,4 @@
   <ItemGroup>
     <ProjectReference Include="..\src\abandoned_vehicle_service.csproj" />
   </ItemGroup>
-
 </Project>
