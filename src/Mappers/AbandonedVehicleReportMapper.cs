@@ -12,59 +12,39 @@ namespace abandoned_vehicle_service.Mappers
             ConfirmIntegrationEFormOptions _VOFConfiguration,
             VerintOptions _verintOptions)
         {
-            Case crmCase = new Case
+            var crmCase = new Case
             {
                 EventCode = _VOFConfiguration.EventId,
                 EventTitle = _verintOptions.EventTitle,
                 Classification = _verintOptions.Classification,
                 FurtherLocationInformation = model.FurtherDetails,
-                Description = GenerateDescription(model)
-            };
-
-            if (!string.IsNullOrWhiteSpace(model.StreetAddress?.PlaceRef))
-                crmCase.AssociatedWithBehaviour = AssociatedWithBehaviourEnum.Street;
-                crmCase.Street = new Street
-                {
-                    Reference = model.StreetAddress.PlaceRef,
-                    Description = string.Empty
-                };
-
-            if (!string.IsNullOrEmpty(model.FirstName) && !string.IsNullOrEmpty(model.LastName))
-            {
-                crmCase.Customer = new Customer
+                Description = GenerateDescription(model),
+                Customer = new Customer
                 {
                     Forename = model.FirstName,
-                    Surname = model.LastName
-                };
-
-                if (!string.IsNullOrEmpty(model.Email))
-                {
-                    crmCase.Customer.Email = model.Email;
-                }
-
-                if (!string.IsNullOrEmpty(model.Phone))
-                {
-                    crmCase.Customer.Telephone = model.Phone;
-                }
-
-                if (string.IsNullOrEmpty(model.CustomersAddress.PlaceRef))
-                {
-                    crmCase.Customer.Address = new Address
+                    Surname = model.LastName,
+                    Email = model.Email,
+                    Telephone = model.Phone,
+                    Address = new Address
                     {
                         AddressLine1 = model.CustomersAddress.AddressLine1,
                         AddressLine2 = model.CustomersAddress.AddressLine2,
                         AddressLine3 = model.CustomersAddress.Town,
                         Postcode = model.CustomersAddress.Postcode,
-                    };
-                }
-                else
-                {
-                    crmCase.Customer.Address = new Address
-                    {
                         Reference = model.CustomersAddress.PlaceRef,
-                        UPRN = model.CustomersAddress.PlaceRef
-                    };
+                        Description = model.CustomersAddress.ToString()
+                    }
                 }
+            };
+
+            if (!string.IsNullOrWhiteSpace(model.StreetAddress?.PlaceRef))
+            {
+                crmCase.AssociatedWithBehaviour = AssociatedWithBehaviourEnum.Street;
+                crmCase.Street = new Street
+                {
+                    Reference = model.StreetAddress.PlaceRef,
+                    Description = model.StreetAddress.ToString()
+                };
             }
 
             return crmCase;
