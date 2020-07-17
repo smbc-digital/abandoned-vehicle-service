@@ -1,4 +1,5 @@
-﻿using abandoned_vehicle_service.Utils.HealthChecks;
+﻿using System.Diagnostics.CodeAnalysis;
+using abandoned_vehicle_service.Utils.HealthChecks;
 using abandoned_vehicle_service.Utils.ServiceCollectionExtensions;
 using abandoned_vehicle_service.Utils.StorageProvider;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,6 @@ using StockportGovUK.AspNetCore.Middleware;
 using StockportGovUK.NetStandard.Gateways.Extensions;
 using StockportGovUK.NetStandard.Gateways.MailingService;
 using StockportGovUK.NetStandard.Gateways.VerintService;
-using System.Diagnostics.CodeAnalysis;
 
 namespace abandoned_vehicle_service
 {

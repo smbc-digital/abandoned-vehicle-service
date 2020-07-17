@@ -1,5 +1,5 @@
-﻿using StockportGovUK.NetStandard.Models.Addresses;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using StockportGovUK.NetStandard.Models.Addresses;
 
 namespace abandoned_vehicle_service.Models
 {
