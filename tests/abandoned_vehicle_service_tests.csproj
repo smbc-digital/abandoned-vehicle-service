@@ -15,11 +15,4 @@
   <ItemGroup>
     <ProjectReference Include="..\src\abandoned_vehicle_service.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="appsettings.test.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

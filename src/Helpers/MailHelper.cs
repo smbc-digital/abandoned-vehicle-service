@@ -1,7 +1,7 @@
 ﻿using abandoned_vehicle_service.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using StockportGovUK.NetStandard.Gateways.MailingServiceGateway;
+using StockportGovUK.NetStandard.Gateways.MailingService;
 using StockportGovUK.NetStandard.Models.AbandonedVehicle;
 using StockportGovUK.NetStandard.Models.Enums;
 using StockportGovUK.NetStandard.Models.Mail;
