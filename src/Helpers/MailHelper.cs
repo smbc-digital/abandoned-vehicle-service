@@ -23,7 +23,7 @@ namespace abandoned_vehicle_service.Helpers
         {
             AbandonedVehicleMailModel submissionDetails = new AbandonedVehicleMailModel();
             _logger.LogInformation(caseReference, street, person);
-            submissionDetails.Subject = "Abandoned Vehicle Report - submission";            
+            submissionDetails.Subject = "Abandoned Vehicle Report - submission";
             submissionDetails.Reference = caseReference;
             submissionDetails.StreetInput = street.SelectedAddress;
             submissionDetails.FirstName = person.FirstName;
