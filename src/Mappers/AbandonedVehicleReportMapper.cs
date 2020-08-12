@@ -43,7 +43,7 @@ namespace abandoned_vehicle_service.Mappers
                 crmCase.Street = new Street
                 {
                     Reference = model.StreetAddress.PlaceRef,
-                    Description = model.CustomersAddress.ToString()
+                    Description = model.StreetAddress.ToString()
                 };
             }
 
