@@ -54,9 +54,6 @@ namespace abandoned_vehicle_service.Mappers
         {
             StringBuilder description = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(abandonedVehicleReport.FurtherDetails))
-                description.Append($"Further details: {abandonedVehicleReport.FurtherDetails}{Environment.NewLine}");
-
             if (!string.IsNullOrEmpty(abandonedVehicleReport.AbandonedReason))
                 description.Append($"Abandoned Reason: {abandonedVehicleReport.AbandonedReason}{Environment.NewLine}");
 
