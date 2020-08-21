@@ -191,7 +191,6 @@ namespace abandoned_vehicle_service_tests.Services
             _mockVerintServiceGateway.Verify(_ => _.CreateVerintOnlineFormCase(It.IsAny<VerintOnlineFormRequest>()), Times.Once);
 
             Assert.NotNull(crmCaseParameter);
-            Assert.Contains(_abandonedVehicleReportData.FurtherDetails, crmCaseParameter.VerintCase.Description);
             Assert.Contains(_abandonedVehicleReportData.AbandonedReason, crmCaseParameter.VerintCase.Description);
             Assert.Contains(_abandonedVehicleReportData.ImageOrVideo, crmCaseParameter.VerintCase.Description);
             Assert.Contains(_abandonedVehicleReportData.ImageOrVideo, crmCaseParameter.VerintCase.Description);
