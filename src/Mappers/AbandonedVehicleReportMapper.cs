@@ -17,6 +17,7 @@ namespace abandoned_vehicle_service.Mappers
                 EventCode = _VOFConfiguration.EventId,
                 EventTitle = _verintOptions.EventTitle,
                 Classification = _verintOptions.Classification,
+                RaisedByBehaviour = RaisedByBehaviourEnum.Individual,
                 FurtherLocationInformation = model.FurtherDetails,
                 Description = GenerateDescription(model),
                 Customer = new Customer
@@ -53,9 +54,6 @@ namespace abandoned_vehicle_service.Mappers
         private static string GenerateDescription(AbandonedVehicleReport abandonedVehicleReport)
         {
             StringBuilder description = new StringBuilder();
-
-            if (!string.IsNullOrEmpty(abandonedVehicleReport.FurtherDetails))
-                description.Append($"Further details: {abandonedVehicleReport.FurtherDetails}{Environment.NewLine}");
 
             if (!string.IsNullOrEmpty(abandonedVehicleReport.AbandonedReason))
                 description.Append($"Abandoned Reason: {abandonedVehicleReport.AbandonedReason}{Environment.NewLine}");
