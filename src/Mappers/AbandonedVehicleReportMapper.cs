@@ -59,7 +59,7 @@ namespace abandoned_vehicle_service.Mappers
                 description.Append($"Abandoned Reason: {abandonedVehicleReport.AbandonedReason}{Environment.NewLine}");
 
             if (!string.IsNullOrEmpty(abandonedVehicleReport.ImageOrVideo))
-                description.Append($"Photos available: {abandonedVehicleReport.ImageOrVideo}{Environment.NewLine}");
+                description.Append($"Photos Available: {abandonedVehicleReport.ImageOrVideo}{Environment.NewLine}");
 
             if (!string.IsNullOrEmpty(abandonedVehicleReport.VehicleMake))
                 description.Append($"Vehicle Make: {abandonedVehicleReport.VehicleMake}{Environment.NewLine}");
