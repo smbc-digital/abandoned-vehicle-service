@@ -30,7 +30,7 @@ namespace abandoned_vehicle_service.Mappers
                     {
                         AddressLine1 = model.CustomersAddress.AddressLine1,
                         AddressLine2 = model.CustomersAddress.AddressLine2,
-                        AddressLine3 = model.CustomersAddress.Town,
+                        City = model.CustomersAddress.Town,
                         Postcode = model.CustomersAddress.Postcode,
                         Reference = model.CustomersAddress.PlaceRef,
                         Description = model.CustomersAddress.ToString()
