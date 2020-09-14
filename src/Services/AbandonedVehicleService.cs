@@ -38,7 +38,7 @@ namespace abandoned_vehicle_service.Services
             if(!streetResult.IsSuccessStatusCode)
                 throw new Exception("AbandonedVehicleService.CreateCase: GetStreet status code not successful");
 
-            // confrim uses the USRN for the street,
+            // confirm uses the USRN for the street,
             // however Verint uses the verint-address-id (Reference) (abandonedVehicleReport.StreetAddress.PlaceRef) for streets
             crmCase.Street.USRN = streetResult.ResponseContent.USRN;
 
