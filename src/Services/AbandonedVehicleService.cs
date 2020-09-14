@@ -39,7 +39,7 @@ namespace abandoned_vehicle_service.Services
                 throw new Exception("AbandonedVehicleService.CreateCase: GetStreet status code not successful");
 
             // confirm uses the USRN for the street
-            // however Verint uses the verint-address-id (Reference) (abandonedVehicleReport.StreetAddress.PlaceRef) for streets
+            // however Verint uses the verint-address-id (Reference) (abandonedVehicleReport.StreetAddress.PlaceRef) for street
             crmCase.Street.USRN = streetResult.ResponseContent.USRN;
 
             try
